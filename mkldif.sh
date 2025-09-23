@@ -24,7 +24,7 @@ make_dnsperf() {
 	local PERFFILE="$ZONEFILE.dnsperf"
 
 	named-compilezone -s full -o "$TMPZONE" "$ZONE" "$ZONEFILE"
-	awk '{print $1, $4}' "$TMPZONE" > "$PERFFILE"
+	awk '{print $1, $4}' "$TMPZONE" | uniq > "$PERFFILE"
 	rm -f "$TMPZONE"
 }
 
@@ -40,7 +40,7 @@ make_dir() {
 
 if [ -d "$INPUT" ]; then
 	make_dir "$INPUT"
-	cat "$INPUT"/*.dnsperf > $INPUT.dnsperf
+	sort --random-sort "$INPUT"/*.dnsperf > $INPUT.dnsperf
 else
 	[ $# -gt 1 ] && shift
 	make_ldif "$INPUT" "$@"
