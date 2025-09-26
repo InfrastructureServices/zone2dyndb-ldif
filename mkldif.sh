@@ -24,6 +24,7 @@ make_dnsperf() {
 	local PERFFILE="$ZONEFILE.dnsperf"
 
 	named-compilezone -s full -o "$TMPZONE" "$ZONE" "$ZONEFILE"
+	sed -e '/ DNSKEY / d' -e '/ CAA / d' -i "$TMPZONE"
 	awk '{print $1, $4}' "$TMPZONE" | sed -e 's/^\*\./any./' | uniq > "$PERFFILE"
 	rm -f "$TMPZONE"
 }
