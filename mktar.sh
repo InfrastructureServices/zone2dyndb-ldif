@@ -6,4 +6,4 @@ fi
 
 sh mkldif.sh fedora-dns/built/DEFAULT
 sh mkldif.sh fedora-dns/master
-tar czf fedora-ldif.tar.gz fedora-dns/{built/DEFAULT,master}/*.{ldif,dnsperf}
+tar czf fedora-ldif.tar.gz fedora-dns/{built/DEFAULT,master}{/*.{ldif,dnsperf},.dnsperf}
